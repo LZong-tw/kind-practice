@@ -1,0 +1,48 @@
+prometheus:
+  prometheusSpec:
+    nodeSelector:
+      node-role.kubernetes.io/infra: "true"
+    serviceMonitorSelector:
+      matchLabels:
+        release: prometheus
+    serviceMonitorNamespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: monitoring
+    resources:
+      requests:
+        cpu: 200m
+        memory: 200Mi
+      limits:
+        cpu: 1000m
+        memory: 256Mi
+    retention: 15d
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: standard
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 1Gi
+  service:
+    type: NodePort
+    nodePort: 30090
+    targetPort: 9090
+
+kubeStateMetrics:
+  nodeSelector:
+    node-role.kubernetes.io/infra: "true"
+
+nodeExporter:
+  tolerations:
+  - effect: NoSchedule
+    operator: Exists
+
+alertmanager:
+  enabled: true
+  alertmanagerSpec:
+    nodeSelector:
+      node-role.kubernetes.io/infra: "true"
+
+grafana:
+  enabled: false 

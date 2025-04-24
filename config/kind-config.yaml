@@ -1,0 +1,23 @@
+# kind-config.yaml
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: monitoring-demo
+nodes:
+- role: control-plane
+  # 為了讓 Prometheus/Grafana 可以抓到 etcd metrics，需要暴露 etcd 的監聽埠
+  # 同時，kube-apiserver 也需要啟用 --bind-address=0.0.0.0
+  kubeadmConfigPatches:
+  - |
+    kind: ClusterConfiguration
+    apiServer:
+      extraArgs:
+    etcd:
+      local:
+        extraArgs:
+          "listen-metrics-urls": "http://0.0.0.0:2381" # 監聽所有端口的指標請求
+- role: worker
+  # 這個 worker 將被標記為 infra node
+- role: worker
+  # 這個 worker 將被標記為 app node
+- role: worker
+  # 這個 worker 將被標記為 app node
