@@ -70,7 +70,7 @@ $ kind create cluster --config kind-config.yaml
 ```bash
 $ kubectl get nodes
 ```
-
+![fig0](fig/1-1.png)
 標記節點角色：
 
 ```bash
@@ -78,12 +78,7 @@ $ kubectl label node monitoring-demo-worker node-role.kubernetes.io/infra=true
 $ kubectl label node monitoring-demo-worker2 node-role.kubernetes.io/app=true
 $ kubectl label node monitoring-demo-worker3 node-role.kubernetes.io/app=true
 ```
-
-驗證標記：
-
-```bash
-$ kubectl get nodes --show-labels
-```
+![fig00](fig/1-2.png)
 
 ## 步驟 3: 安裝 MetalLB
 
@@ -102,13 +97,13 @@ $ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.9/con
 ```bash
 $ docker ps | grep -i kind
 ```
-
+![fig000](fig/3-1.png)
 使用以下命令確定各 container 的 IP：
 
 ```bash
 $ docker inspect <container-id> | grep IPAddress
 ```
-
+![fig0000](fig/3-2.png)
 選擇一個未被 Kind 節點使用的 IP 範圍，建立 `metallb-l2config.yaml` 檔案：
 
 ```yaml
@@ -136,7 +131,7 @@ spec:
 ```bash
 $ kubectl apply -f metallb-l2config.yaml
 ```
-
+![fig00000](fig/3-3.png)
 ### 3. 限制 Speaker 只在 Infra 節點運行
 
 編輯 MetalLB 的 speaker DaemonSet：
@@ -166,12 +161,13 @@ spec:
       # ... 其他設定 ...
 ```
 
+儲存並退出編輯器。Kubernetes 會自動更新 Pod。
 確認 Speaker 只在標記為 infra=true 的節點上運行：
 
 ```bash
 $ kubectl get pods -n metallb-system -o wide
 ```
-
+![fig000000](fig/3-4.png)
 ## 步驟 4: 安裝監控元件
 
 ### 1.	安裝 Helm:
@@ -249,7 +245,7 @@ $ helm install prometheus prometheus-community/kube-prometheus-stack \
   --namespace monitoring \
   -f prometheus-values.yaml
 ```
-![fig1](fig/6-1.png)
+![fig1](fig/4-1.png)
 ## 步驟 5: 安裝與配置 Grafana (外部 Docker/Podman)
 ### 1.	執行 Grafana 容器:
 ```bash
