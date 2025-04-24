@@ -71,6 +71,7 @@ $ kind create cluster --config kind-config.yaml
 $ kubectl get nodes
 ```
 ![fig0](fig/1-1.png)
+
 標記節點角色：
 
 ```bash
@@ -98,12 +99,14 @@ $ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.9/con
 $ docker ps | grep -i kind
 ```
 ![fig000](fig/3-1.png)
+
 使用以下命令確定各 container 的 IP：
 
 ```bash
 $ docker inspect <container-id> | grep IPAddress
 ```
 ![fig0000](fig/3-2.png)
+
 選擇一個未被 Kind 節點使用的 IP 範圍，建立 `metallb-l2config.yaml` 檔案：
 
 ```yaml
@@ -307,11 +310,17 @@ _注意: --network=kind 是關鍵，它讓 Grafana 容器可以解析並造訪 K
 #### CPU Throttling 監控說明
 - 監控 CPU Throttling，需要新增以下面板：
 1. 在右上角選擇 + → New Dashboard
+
 ![fig13](fig/5-5-4.png)
+
 2. 選擇 Add visualization
+
 ![fig14](fig/5-5-5.png)
+
 3. 選擇 prometheus
+
 ![fig15](fig/5-5-6.png)
+
 4. 在下方選擇 code，並輸入以下 query
 ```query
 sum(increase(container_cpu_cfs_throttled_periods_total{container!=""}[5m])) by (pod, container, namespace) /
@@ -319,6 +328,7 @@ sum(increase(container_cpu_cfs_periods_total{container!=""}[5m])) by (pod, conta
 ```
 ![fig16](fig/5-5-7.png)
 5. 最後選擇 Save dashboard
+
 ![fig17](fig/5-5-8.png)
 - 新增這個面板的原因，在於 CPU Throttling 的數值，並不一定會在既有的儀表板中顯示，因此必須手動新增這項指標做為面板
 ## 步驟 6: 部署測試應用程式和 HPA
