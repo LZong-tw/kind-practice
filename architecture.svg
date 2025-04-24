@@ -1,0 +1,109 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="600" fill="#f8f9fa" />
+  
+  <!-- Title -->
+  <text x="400" y="30" font-family="Arial" font-size="24" text-anchor="middle" font-weight="bold">Kubernetes Monitoring Architecture</text>
+  
+  <!-- Kind Cluster Box -->
+  <rect x="50" y="60" width="650" height="400" rx="10" fill="#e9ecef" stroke="#adb5bd" stroke-width="2" />
+  <text x="375" y="80" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold">Kind Cluster</text>
+  
+  <!-- Control Plane Node -->
+  <rect x="80" y="100" width="180" height="120" rx="5" fill="#cfe2ff" stroke="#0d6efd" stroke-width="2" />
+  <text x="170" y="120" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold">Control Plane Node</text>
+  <rect x="100" y="130" width="140" height="25" rx="3" fill="#ffffff" stroke="#495057" />
+  <text x="170" y="147" font-family="Arial" font-size="12" text-anchor="middle">kube-apiserver</text>
+  <rect x="100" y="160" width="140" height="25" rx="3" fill="#ffffff" stroke="#495057" />
+  <text x="170" y="177" font-family="Arial" font-size="12" text-anchor="middle">etcd</text>
+  <rect x="100" y="190" width="140" height="25" rx="3" fill="#ffffff" stroke="#495057" />
+  <text x="170" y="207" font-family="Arial" font-size="12" text-anchor="middle">node-exporter</text>
+  
+  <!-- Infra Node -->
+  <rect x="290" y="100" width="180" height="120" rx="5" fill="#d1e7dd" stroke="#198754" stroke-width="2" />
+  <text x="380" y="120" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold">Infra Node (Worker1)</text>
+  <rect x="310" y="130" width="140" height="20" rx="3" fill="#ffffff" stroke="#495057" />
+  <text x="380" y="145" font-family="Arial" font-size="12" text-anchor="middle">Prometheus</text>
+  <rect x="310" y="155" width="140" height="20" rx="3" fill="#ffffff" stroke="#495057" />
+  <text x="380" y="170" font-family="Arial" font-size="12" text-anchor="middle">kube-state-metrics</text>
+  <rect x="310" y="180" width="140" height="20" rx="3" fill="#ffffff" stroke="#495057" />
+  <text x="380" y="195" font-family="Arial" font-size="12" text-anchor="middle">MetalLB Speaker</text>
+  <rect x="310" y="205" width="140" height="20" rx="3" fill="#ffffff" stroke="#495057" />
+  <text x="380" y="220" font-family="Arial" font-size="12" text-anchor="middle">node-exporter</text>
+  
+  <!-- App Node 1 -->
+  <rect x="80" y="240" width="180" height="120" rx="5" fill="#f8d7da" stroke="#dc3545" stroke-width="2" />
+  <text x="170" y="260" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold">App Node (Worker2)</text>
+  <rect x="100" y="270" width="140" height="30" rx="3" fill="#ffffff" stroke="#495057" />
+  <text x="170" y="290" font-family="Arial" font-size="12" text-anchor="middle">Application Pods</text>
+  <rect x="100" y="310" width="140" height="30" rx="3" fill="#ffffff" stroke="#495057" />
+  <text x="170" y="330" font-family="Arial" font-size="12" text-anchor="middle">node-exporter</text>
+  
+  <!-- App Node 2 -->
+  <rect x="290" y="240" width="180" height="120" rx="5" fill="#f8d7da" stroke="#dc3545" stroke-width="2" />
+  <text x="380" y="260" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold">App Node (Worker3)</text>
+  <rect x="310" y="270" width="140" height="30" rx="3" fill="#ffffff" stroke="#495057" />
+  <text x="380" y="290" font-family="Arial" font-size="12" text-anchor="middle">Application Pods</text>
+  <rect x="310" y="310" width="140" height="30" rx="3" fill="#ffffff" stroke="#495057" />
+  <text x="380" y="330" font-family="Arial" font-size="12" text-anchor="middle">node-exporter</text>
+  
+  <!-- MetalLB Config -->
+  <rect x="500" y="100" width="180" height="120" rx="5" fill="#fff3cd" stroke="#ffc107" stroke-width="2" />
+  <text x="590" y="120" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold">MetalLB Config</text>
+  <rect x="520" y="130" width="140" height="80" rx="3" fill="#ffffff" stroke="#495057" />
+  <text x="590" y="150" font-family="Arial" font-size="12" text-anchor="middle">IPAddressPool</text>
+  <text x="590" y="170" font-family="Arial" font-size="12" text-anchor="middle">172.18.255.200-</text>  
+  <text x="590" y="190" font-family="Arial" font-size="12" text-anchor="middle">172.18.255.250</text>
+  
+  <!-- Test App with HPA -->
+  <rect x="500" y="240" width="180" height="120" rx="5" fill="#e9ecef" stroke="#6c757d" stroke-width="2" />
+  <text x="590" y="260" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold">Test Application</text>
+  <rect x="520" y="270" width="140" height="30" rx="3" fill="#ffffff" stroke="#495057" />
+  <text x="590" y="290" font-family="Arial" font-size="12" text-anchor="middle">php-apache</text>
+  <rect x="520" y="310" width="140" height="30" rx="3" fill="#ffffff" stroke="#495057" />
+  <text x="590" y="330" font-family="Arial" font-size="12" text-anchor="middle">HPA (CPU 50%)</text>
+  
+  <!-- External Grafana -->
+  <rect x="290" y="390" width="180" height="100" rx="5" fill="#d0bfff" stroke="#6610f2" stroke-width="2" />
+  <text x="380" y="410" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold">External Grafana</text>
+  <rect x="310" y="420" width="140" height="60" rx="3" fill="#ffffff" stroke="#495057" />
+  <text x="380" y="440" font-family="Arial" font-size="12" text-anchor="middle">Docker Container</text>
+  <text x="380" y="460" font-family="Arial" font-size="12" text-anchor="middle">Port 3000</text>
+  
+  <!-- Connection lines -->
+  <!-- Prometheus to nodes for metrics -->
+  <line x1="380" y1="200" x2="170" y2="200" stroke="#198754" stroke-width="2" stroke-dasharray="5,5" />
+  <text x="275" y="195" font-family="Arial" font-size="10" text-anchor="middle" fill="#198754">Collects metrics</text>
+  
+  <line x1="380" y1="200" x2="170" y2="320" stroke="#198754" stroke-width="2" stroke-dasharray="5,5" />
+  <line x1="380" y1="200" x2="380" y2="320" stroke="#198754" stroke-width="2" stroke-dasharray="5,5" />
+  
+  <!-- Grafana to Prometheus -->
+  <line x1="380" y1="390" x2="380" y2="220" stroke="#6610f2" stroke-width="2" />
+  <text x="390" y="310" font-family="Arial" font-size="10" text-anchor="start" fill="#6610f2">Prometheus DataSource</text>
+  
+  <!-- HPA to App Nodes -->
+  <line x1="520" y1="325" x2="430" y2="290" stroke="#dc3545" stroke-width="2" />
+  <line x1="520" y1="325" x2="220" y2="290" stroke="#dc3545" stroke-width="2" />
+  <text x="450" y="330" font-family="Arial" font-size="10" text-anchor="middle" fill="#dc3545">Auto-scales</text>
+  
+  <!-- Legend -->
+  <rect x="80" y="510" width="640" height="70" rx="5" fill="#ffffff" stroke="#adb5bd" stroke-width="1" />
+  <text x="400" y="530" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold">Legend</text>
+  
+  <!-- Legend items -->
+  <rect x="100" y="540" width="15" height="15" fill="#cfe2ff" stroke="#0d6efd" stroke-width="1" />
+  <text x="125" y="552" font-family="Arial" font-size="12" text-anchor="start">Control Plane</text>
+  
+  <rect x="220" y="540" width="15" height="15" fill="#d1e7dd" stroke="#198754" stroke-width="1" />
+  <text x="245" y="552" font-family="Arial" font-size="12" text-anchor="start">Infra Node</text>
+  
+  <rect x="340" y="540" width="15" height="15" fill="#f8d7da" stroke="#dc3545" stroke-width="1" />
+  <text x="365" y="552" font-family="Arial" font-size="12" text-anchor="start">App Nodes</text>
+  
+  <rect x="460" y="540" width="15" height="15" fill="#fff3cd" stroke="#ffc107" stroke-width="1" />
+  <text x="485" y="552" font-family="Arial" font-size="12" text-anchor="start">MetalLB Config</text>
+  
+  <rect x="580" y="540" width="15" height="15" fill="#d0bfff" stroke="#6610f2" stroke-width="1" />
+  <text x="605" y="552" font-family="Arial" font-size="12" text-anchor="start">External Grafana</text>
+</svg>
